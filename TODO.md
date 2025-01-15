@@ -52,10 +52,6 @@ This document outlines the tasks to be completed for the Battle Map project. Eac
   - *Deadline:* 02/01
   - *Assigned to:* Dale
 
-- [ ] **Github** - *Description:* Create repo for project.
-  - *Priority:* High
-  - *Deadline:* 01/14
-  - *Assigned to:* Dale
 
 - [ ] **Battle Menu** - *Description:* Create simple menu for battle map, displaying the state and mock stats.
   - *Priority:* High
@@ -74,11 +70,17 @@ This document outlines the tasks to be completed for the Battle Map project. Eac
 
 
 
+## TO BE REVIEWED:
+-------------------------------------------------------------------------------------------------------------
 
 
+## DONE
+-------------------------------------------------------------------------------------------------------------
 
-
-
+- [ X ] **Github** - *Description:* Create repo for project.
+  - *Priority:* High
+  - *Deadline:* 01/14
+  - *Assigned to:* Dale
 
 
 

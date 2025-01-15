@@ -11,6 +11,7 @@
     height: 80vh;
     margin-top: 1em;
     margin-left: 1em;
+    padding: 2em;
 }
 
 .linkcontainer {
@@ -57,9 +58,23 @@
     cursor: pointer;
 }
 
+@media(max-width:1025px){
+    .container {
+        right: 0;
+        width: 50%;
+    }
+}
+
 @media(max-width:767px){
     .container {
         right: 0;
         width: 75%;
     }
 }
+
+@media(max-width:400px){
+    .links{
+      font-size: var(--font-size-md);
+      font-weight: 600;
+    }
+  }
