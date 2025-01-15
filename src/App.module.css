@@ -1,0 +1,18 @@
+/* src/App.module.css */
+.container {
+  min-height: 100vh;
+  padding: var(--spacing-xl);
+  background-color: var(--background-100);
+  color: var(--text);
+  transition: all 0.3s ease;
+}
+
+.header {
+  margin-bottom: var(--spacing-xl);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--spacing-lg);
+}

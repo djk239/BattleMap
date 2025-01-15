@@ -1,0 +1,68 @@
+/* src/components/Card/Card.module.css */
+.container {
+  display: flex;
+  position: fixed; 
+  top: 50%;        
+  left: 50%;
+  width: 50vw;
+  height: 50vh;       
+  transform: translate(-50%, -50%); 
+  background-color: var(--background-300); 
+  border-radius: var(--border-radius-md);
+  align-items: center;
+}
+
+.state{
+  max-width: 100px;
+  max-height: 100px;
+  display: flex;
+  position: fixed; 
+  top: 50%;        
+  left: 50%;
+  width: 50vw;
+  height: 50vh;       
+  transform: translate(-50%, -50%); 
+  background-color: #f9f9f9; 
+  padding: 20px;
+  }
+
+.txt{
+  color: var(--text-800);
+  text-shadow: 2px 2px 2px var(--primary-200);
+  text-align: left;
+}
+
+.infoContainer{
+  padding: 2em;
+}
+
+.statsContainer{
+  padding: 2em;
+}
+
+.bar{
+  background-color: var(--accent-700);
+  box-shadow: 2px 2px 5px 1px var(--primary-400);
+  height: 75%;
+  width: 10px;
+  border-radius: var(--border-radius-md);
+}
+
+.closebtn{
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  right:0;
+  top: 0;
+  margin-top: 2%;
+  margin-right: 2%;
+}
+
+.closebtn rect{
+  fill: var(--primary-600);
+}
+
+.closebtn:hover{
+  opacity: 0.7;
+}

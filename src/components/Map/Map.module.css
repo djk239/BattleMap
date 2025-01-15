@@ -1,0 +1,23 @@
+
+
+.container{
+    display: flex;
+    justify-content: center;
+}
+
+
+path {
+    pointer-events: all;
+    fill: var(--background-600)
+  }
+
+circle[class="DC2"],
+circle[data-name="DC"] {
+      display: none !important;
+  }
+
+
+path:hover {
+    opacity: 0.50;
+    cursor: pointer;
+  }
