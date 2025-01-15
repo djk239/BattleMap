@@ -10,6 +10,7 @@
     transition: all 0.3s ease;
     align-self: center;
     margin-bottom: 1em;
+    font-weight: 800;
   }
   
   .toggleButton:hover {

@@ -27,7 +27,6 @@ function App() {
         <Header />
         <Map />
       </div>
-      <Card state="CA" />
     </AuthProvider>
   );
 }
