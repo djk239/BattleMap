@@ -5,6 +5,8 @@ import Header from './components/Header/Header';
 import { AuthProvider } from './AuthContext.jsx';
 import Map from './components/Map/Map.jsx';
 import Card from './components/Card/Card.jsx';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Account from './components/Account/Account.jsx';
 
 
 
@@ -24,8 +26,13 @@ function App() {
   return (
     <AuthProvider>
       <div className={styles.container}>
-        <Header />
-        <Map />
+      <Router>
+        <Routes>
+          <Route path="/" element={<Map />} />
+          <Route path="/account" element={<Account />} />
+
+        </Routes>
+      </Router>
       </div>
     </AuthProvider>
   );

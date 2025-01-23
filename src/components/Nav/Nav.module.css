@@ -12,6 +12,7 @@
     margin-top: 1em;
     margin-left: 1em;
     padding: 2em;
+    box-shadow: 3px 3px var(--background-100), -2px -2px .4em var(--background-50);
 }
 
 .linkcontainer {
@@ -73,6 +74,13 @@
 }
 
 @media(max-width:400px){
+    .links{
+      font-size: var(--font-size-md);
+      font-weight: 600;
+    }
+  }
+
+  @media(max-width:1600px){
     .links{
       font-size: var(--font-size-md);
       font-weight: 600;

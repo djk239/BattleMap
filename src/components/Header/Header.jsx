@@ -35,7 +35,7 @@ const Header = () => {
   return (
     <>
       <div className={styles.linkcontain}>
-        <h1 className={styles.title}>Battle Map</h1>
+        <Link to="/" className={styles.title}>Battle Map</Link>
         <div className={styles.container}>
           <motion.div
             className={styles.hamburger}

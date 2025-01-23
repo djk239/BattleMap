@@ -3,6 +3,7 @@ import USAMap from "react-usa-map";
 import styles from './Map.module.css';
 import Card from '../Card/Card';
 import { motion, AnimatePresence } from "framer-motion";
+import Header from '../Header/Header';
 
 
 // Define the MapComponent as a functional component
@@ -27,6 +28,8 @@ const Map = () => {
   };
 
   return (
+    <>
+    <Header />
     <div className={styles.container} id="mapcotainer">
       <USAMap 
         customize={statesCustomConfig()} // Use statesCustomConfig directly here
@@ -39,6 +42,7 @@ const Map = () => {
         } 
       </AnimatePresence>
       </div>
+      </>
   );
 };
 

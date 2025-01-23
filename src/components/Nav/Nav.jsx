@@ -31,7 +31,7 @@ function Nav({close}) {
         <motion.p className={styles.links} whileTap={{scale: 0.8}} whileHover={{scale: 1.25}} onClick={popup}>SignUp / Login</motion.p>
         }
             <motion.div whileTap={{scale: 0.8}} whileHover={{scale: 1.2}}>
-                <div className={styles.links} to="/">War Map</div>
+                <Link className={styles.links} to="/">War Map</Link>
             </motion.div>
             <motion.div whileTap={{scale: 0.8}} whileHover={{scale: 1.2}}>
                 <div className={styles.links} to="/">Leaderboards</div>

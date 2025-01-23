@@ -2,7 +2,7 @@
 .container {
   min-height: 100vh;
   padding: var(--spacing-xl);
-  background-color: var(--background-100);
+  background: radial-gradient(circle, var(--background-50) 0%, var(--background-100) 100%);
   color: var(--text);
   transition: all 0.3s ease;
 }
