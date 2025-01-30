@@ -1,0 +1,60 @@
+.title{
+    color: var(--text-800);
+    text-shadow: 2px 2px 2px var(--background-200);
+}
+
+.form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 5vh;
+    padding-left: 2em;
+    padding-right: 2em;
+}
+
+.label{
+    color: var(--accent-600);
+    text-shadow: 2px 2px 2px var(--background-100);
+    margin-bottom: 1em;
+    font-weight: 700;
+    font-size: large;
+}
+
+.inputBox{
+    min-width: 24em;
+    border-radius: var(--border-radius-md);    
+    text-align: center;
+    height: 2em;
+    background-color: var(--secondary-200);
+    color: var(--accent-600);
+    font-weight: 600;
+}
+
+.button{
+    min-width: 24em;
+    padding: 10px;
+    border-radius: var(--border-radius-lg);
+    background-color: var(--accent-600);
+    color: var(--text-500);
+    text-shadow: 2px 2px 5px var(--background-700);
+    cursor: pointer;
+    min-width: 70%;
+    margin-top: 2em;
+    margin-bottom: 2em;
+    font-weight: 600;
+    font-size: medium;
+  }
+
+  .errors{
+    color: red;
+    text-shadow: 2px 2px 5px var(--background-200);
+    font-size: x-small;
+    font-weight: 800;
+
+  }

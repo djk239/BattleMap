@@ -4,8 +4,11 @@ import USAMap from "react-usa-map";
 import SingleState from './SingleState';
 import { fetchStateByName } from '../../services/api';
 import { motion, AnimatePresence } from "framer-motion";
+import { useAuth } from '../../AuthContext';
 
 export default function Card({ state, close }) { 
+
+  const { user, isLoggedIn } = useAuth();
 
   const [stateData, setStateData] = useState(null);
   const [toDeploy, setToDeploy] = useState(0);
@@ -30,7 +33,7 @@ export default function Card({ state, close }) {
   const handleDeploy = (e) => {
     e.preventDefault();
     // Handle deployment logic here
-    console.log("Deploying", toDeploy);
+    console.log(`Deploying to ${state}, with ${toDeploy} troops from ${user.username}`);
   };
 
   return (
@@ -62,7 +65,7 @@ export default function Card({ state, close }) {
         <div className={styles.infoContainer}>
           <h2 className={styles.txt}>{state}</h2>
           <SingleState stateAbbreviation={state} />
-          <h3 className={styles.txt}>Owner: {state}</h3>
+          { stateData ? (<h3 className={styles.txt}>Owner: {stateData.owner}</h3>) :(<></>)}
         </div>
         <div className={styles.bar}/>
         <div className={styles.statsContainer}>

@@ -7,6 +7,7 @@ import Map from './components/Map/Map.jsx';
 import Card from './components/Card/Card.jsx';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Account from './components/Account/Account.jsx';
+import SignupLogin from './components/Login/SignupLogin.jsx';
 
 
 
@@ -30,7 +31,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Map />} />
           <Route path="/account" element={<Account />} />
-
+          <Route path="/login" element={<SignupLogin />} />
         </Routes>
       </Router>
       </div>

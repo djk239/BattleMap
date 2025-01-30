@@ -1,5 +1,6 @@
 import { createContext, useContext, useState, useEffect } from 'react';
 //import { getAccessToken, removeTokens } from './api';
+import { mockAccounts } from './mockdata/mockData';
 
 // Create the context for auth
 const AuthContext = createContext();
@@ -7,12 +8,31 @@ const AuthContext = createContext();
 // Create provider component
 export function AuthProvider({ children }) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [user, setUser] = useState(null);
 
-  // checks token on mount
+  // Simulate fetching the "Guest" user
+  const fetchGuestUser = () => {
+    const guestUser = mockAccounts.find((account) => account.username === "Guest");
+    if (guestUser) {
+      setUser(guestUser); // Set the Guest user data
+      setIsLoggedIn(false); // Ensure the user is not logged in
+    } else {
+      console.error('Guest user not found');
+    }
+  };
+
+
+  // Checks token on mount
   useEffect(() => {
     const checkTokenValidity = async () => {
       //const token = await getAccessToken();
-      setIsLoggedIn(!!token);
+      //const isValid = !!token;
+      setIsLoggedIn(false);
+
+      // If there's no valid token, fetch the Guest user
+      //if (!isValid) {
+        fetchGuestUser();
+      //}
     };
 
     // Initial check on component mount
@@ -36,7 +56,7 @@ export function AuthProvider({ children }) {
   };
 
   return (
-    <AuthContext.Provider value={{ isLoggedIn, handleLog, handleLogout }}>
+    <AuthContext.Provider value={{ isLoggedIn, user, handleLog, handleLogout }}>
       {children}
     </AuthContext.Provider>
   );

@@ -1,68 +1,124 @@
-.container{
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: var(--background-200);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.profile {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: var(--primary-600);
+}
+
+.profileContainer {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: var(--background-200);
-    border-radius: var(--border-radius-md);
-    margin-top: 5vh;
-    box-shadow: 3px 3px var(--primary-100), -2px -2px .4em var(--background-50);
+    gap: 20px;
 }
 
-.profile{
-    color: var(--text-800);
-    text-shadow: 2px 2px 2px var(--primary-200);
-    padding: 1em;
+.pfpContainer {
+    text-align: center;
 }
 
-.profileContainer{
+.pfp {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--accent-600);
+}
+
+.username {
+    font-size: 1.5rem;
+    margin: 10px 0 5px;
+    color: var(--text-900);
+}
+
+.level {
+    font-size: 1rem;
+    color: var(--text-950);
+}
+
+.details {
+    width: 100%;
+    max-width: 400px;
+    background-color: var(--background-100);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.text {
+    font-size: 1rem;
+    margin: 10px 0;
+    color: var(--text-900);
+}
+
+.notifications {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.checkbox {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.changepass {
+    padding: 10px 20px;
+    background-color: var(--accent-600);
+    color: var(--text-600);
+    font-weight: 600;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+.changepass:hover {
+    background-color: var(--accent-400);
+}
+
+.loginPrompt {
     display: flex;
     flex-direction: column;
-    justify-items: end;
-    gap: 2em;
-    padding: 3em;
-}
-
-.pfpContainer{
-    display: flex;
-    flex-direction: row;
-    align-items: end;
-    gap: 1em;
-}
-.username{
-    color: var(--text-600);
-    text-shadow: 2px 2px 2px var(--accent-100);
-}
-
-.level{
-    color: var(--text-600);
-    text-shadow: 2px 2px 2px var(--accent-100);
-}
-
-.edit{
-    position: fixed;
-    background-color: #dddddd00;
-    padding: 5px;
+    align-items: center;
+    justify-content: center;
+    height: 60vh;
     text-align: center;
-    border-radius: var(--border-radius-lg);
-    margin-left: 40em;    
+    background-color: var(--background-200);
+    color: var(--text-900);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 2em;
 }
 
-.text{
-    color: var(--text-600);
-    text-shadow: 2px 2px 2px var(--accent-100);
-}
-
-.pfp{
-    width: 126px;
-    height: 126px;
-    border-radius: 50%;
-}
-
-.changepass{
-    padding: 10px;
-    border-radius: var(--border-radius-lg);
-    background-color: var(--accent-600);
-    color: var(--text-500);
+.loginButton {
+    padding: 10px 20px;
+    background-color: var(--accent-400);
+    border: none;
+    border-radius: 5px;
     cursor: pointer;
-    font-weight: 800;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+}
+
+.loginButton:hover {
+    background-color: var(--accent-600);
+}
+
+.links{
+    color: var(--text-600);
+    text-decoration: none;
+    font-weight: 600;
 }

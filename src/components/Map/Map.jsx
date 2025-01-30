@@ -4,6 +4,7 @@ import styles from './Map.module.css';
 import Card from '../Card/Card';
 import { motion, AnimatePresence } from "framer-motion";
 import Header from '../Header/Header';
+import Glance from '../Glance/Glance';
 
 
 // Define the MapComponent as a functional component
@@ -30,7 +31,7 @@ const Map = () => {
   return (
     <>
     <Header />
-    <div className={styles.container} id="mapcotainer">
+    <div className={styles.container} id="mapcontainer">
       <USAMap 
         customize={statesCustomConfig()} // Use statesCustomConfig directly here
         className={styles.path} 
@@ -41,6 +42,7 @@ const Map = () => {
           <Card state={curState} close={handleCloseWarMenu} />
         } 
       </AnimatePresence>
+      <Glance />
       </div>
       </>
   );
