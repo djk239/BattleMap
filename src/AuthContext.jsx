@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useEffect } from 'react';
-//import { getAccessToken, removeTokens } from './api';
+import { getAccessToken, getUserProfile, removeTokens } from './services/api';
 import { mockAccounts } from './mockdata/mockData';
 
 // Create the context for auth
@@ -10,29 +10,11 @@ export function AuthProvider({ children }) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState(null);
 
-  // Simulate fetching the "Guest" user
-  const fetchGuestUser = () => {
-    const guestUser = mockAccounts.find((account) => account.username === "Guest");
-    if (guestUser) {
-      setUser(guestUser); // Set the Guest user data
-      setIsLoggedIn(false); // Ensure the user is not logged in
-    } else {
-      console.error('Guest user not found');
-    }
-  };
 
-
-  // Checks token on mount
   useEffect(() => {
     const checkTokenValidity = async () => {
-      //const token = await getAccessToken();
-      //const isValid = !!token;
-      setIsLoggedIn(false);
-
-      // If there's no valid token, fetch the Guest user
-      //if (!isValid) {
-        fetchGuestUser();
-      //}
+      const token = await getAccessToken();
+      setIsLoggedIn(!!token);
     };
 
     // Initial check on component mount
@@ -45,14 +27,39 @@ export function AuthProvider({ children }) {
     return () => clearInterval(interval);
   }, []);
 
+  useEffect(() => {
+    if (isLoggedIn) {
+      // Fetch the user profile
+      getUserProfile()
+        .then((userProfile) => {
+          // Update the state
+          setUser(userProfile);
+        })
+        .catch((error) => {
+          console.error('Failed to fetch user profile:', error);
+        });
+    }
+  }, [isLoggedIn]);
+
   // Functions to handle login/logout
-  const handleLog = () => {
-    setIsLoggedIn(true);
+  
+  // Function to handle login
+  const handleLog = async () => {
+    try {
+      // Fetch the user profile
+      const userProfile = await getUserProfile();
+
+      // Update the state
+      setIsLoggedIn(true);
+      setUser(userProfile);
+    } catch (error) {
+      console.error('Failed to fetch user profile:', error);
+    }
   };
 
   const handleLogout = () => {
     setIsLoggedIn(false);
-    //removeTokens();
+    removeTokens();
   };
 
   return (

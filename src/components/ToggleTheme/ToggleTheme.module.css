@@ -1,18 +1,28 @@
-/* src/components/ThemeToggle/ThemeToggle.module.css */
+.themeToggleContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .toggleButton {
-    padding: var(--spacing-sm) var(--spacing-md);
-    border-radius: var(--border-radius-md);
-    background-color: var(--primary-600);
-    color: var(--text-300);
-    cursor: pointer;
-    font-size: var(--font-size-md);
-    max-width: fit-content;
-    transition: all 0.3s ease;
-    align-self: center;
-    margin-bottom: 1em;
-    font-weight: 800;
-  }
-  
-  .toggleButton:hover {
-    opacity: 0.9;
-  }
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--border-radius-md);
+  background-color: var(--primary-600);
+  color: var(--text-300);
+  cursor: pointer;
+  font-size: var(--font-size-md);
+  max-width: fit-content;
+  transition: all 0.3s ease;
+  align-self: center;
+  margin-bottom: 1em;
+  font-weight: 800;
+}
+
+.toggleButton:hover {
+  transform: scale(1.1);
+}
+
+.toggleButton:focus {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}

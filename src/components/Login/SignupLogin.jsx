@@ -1,16 +1,22 @@
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion'; // Import Framer Motion
+import { motion, AnimatePresence } from 'framer-motion'; 
 import Header from '../Header/Header';
 import styles from './SignupLogin.module.css';
 import { useFormik } from 'formik';
+import { useAuth } from '../../AuthContext';
 import { signupSchema } from '../../Schema/SignupSchema';
 import { loginSchema } from '../../Schema/LoginSchema';
+import { login, signup } from '../../services/api';
 import DOMPurify from 'dompurify';
 import LoginForm from './LoginForm';
 import SignupForm from './SignupForm';
+import { useNavigate } from 'react-router-dom';
 
 export default function SignupLogin() {
     const [isLoggingin, setIsLoggingin] = useState(true);
+    const { handleLog, handleLogout } = useAuth();
+
+    const navigate = useNavigate();
 
     // Helper to clean any malicious input
     const sanitizeInput = (input) => DOMPurify.sanitize(input);
@@ -23,18 +29,14 @@ export default function SignupLogin() {
         },
         validationSchema: loginSchema,
         onSubmit: async (values) => {
-            const sanitizedValues = {
-                username: sanitizeInput(values.username),
-                password: sanitizeInput(values.password),
-            };
+            console.log("Submitting form with values:", values); // Debugging step
             try {
-                const response = await login(sanitizedValues);
+                const response = await login(values); // Ensure this function is defined
                 console.log("Login successful:", response);
-                closeMenu();
                 handleLog();
+                navigate('/');
             } catch (error) {
                 console.log("Login error:", error);
-                setLoginError("Credentials do not match. Please try again.");
             }
         },
     });
@@ -58,7 +60,6 @@ export default function SignupLogin() {
             try {
                 const response = await signup(sanitizedValues);
                 console.log("Signup successful:", response);
-                closeMenu();
             } catch (error) {
                 console.log("Signup error:", error);
                 setSignupError("Username or email already in use.");

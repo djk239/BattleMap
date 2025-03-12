@@ -7,18 +7,7 @@ import { useAuth } from '../../AuthContext';
 import { Link } from 'react-router-dom';
 
 const Account = () => {
-    const { isLoggedIn, handleLog } = useAuth(); 
-    const [user, setUser] = useState(null);
-
-    // Simulate fetching the logged-in user's data
-    useEffect(() => {
-        if (isLoggedIn) {
-            // Replace this with your actual logic to fetch user data
-            const loggedInUserId = 1; // Use the authenticated user's ID (replace with dynamic ID if available)
-            const loggedInUser = mockAccounts.find(account => account.id === loggedInUserId);
-            setUser(loggedInUser);
-        }
-    }, [isLoggedIn]);
+    const { user, isLoggedIn, handleLogout } = useAuth();
 
     // Function to handle notifications toggle
     const handleNotificationsToggle = () => {
@@ -90,6 +79,13 @@ const Account = () => {
                                 onChange={handleNotificationsToggle}
                                 className={styles.checkbox}
                             />
+                            <motion.button
+                            className={styles.logout}
+                            whileHover={{ scale: 1.05 }}
+                            onClick={handleLogout}
+                            >
+                                Logout
+                            </motion.button>
                         </div>
                     </div>
                     <motion.button

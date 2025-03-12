@@ -1,31 +1,30 @@
-import React, { useState, useEffect } from 'react';
-import styles from './Header.module.css';
-import { motion, AnimatePresence } from 'framer-motion';
+// src/components/Header/Header.jsx
+import { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
+import styles from './Header.module.css';
 import Nav from '../Nav/Nav';
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const handleClick = () => {
-    setMenuOpen(!menuOpen);
-  };
+  const toggleMenu = useCallback(() => {
+    setMenuOpen(prev => !prev);
+  }, []);
 
-  // Effect to lock/unlock scrolling when menu is open (mainly for mobile devices, may no longer be needed. kept as precaution)
   useEffect(() => {
-    if (menuOpen) {
-      document.documentElement.style.overflow = 'hidden';
-      document.body.style.overflow = 'hidden';
-      document.body.style.position = 'fixed';
-      document.body.style.width = '100%';
-    } else {
-      document.documentElement.style.overflow = '';
-      document.body.style.overflow = '';
-      document.body.style.position = '';
-    }
+    const updateBodyScroll = () => {
+      const isOverflowHidden = menuOpen;
+      document.documentElement.style.overflow = isOverflowHidden ? 'hidden' : '';
+      document.body.style.overflow = isOverflowHidden ? 'hidden' : '';
+      document.body.style.position = isOverflowHidden ? 'fixed' : '';
+      document.body.style.width = isOverflowHidden ? '100%' : '';
+    };
 
-    // Cleanup function to reset overflow when component unmounts
+    updateBodyScroll();
+
     return () => {
+      // Reset styles on unmount
       document.documentElement.style.overflow = '';
       document.body.style.overflow = '';
       document.body.style.position = '';
@@ -39,12 +38,12 @@ const Header = () => {
         <div className={styles.container}>
           <motion.div
             className={styles.hamburger}
-            onClick={handleClick}
+            onClick={toggleMenu}
             initial={false}
             animate={menuOpen ? 'open' : 'closed'}
           >
             <svg viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <motion.rect
+            <motion.rect
                 width="24"
                 height="2"
                 rx="1"
@@ -81,7 +80,9 @@ const Header = () => {
           </motion.div>
         </div>
       </div>
-      <AnimatePresence>{menuOpen && <Nav close={handleClick} />}</AnimatePresence>
+      <AnimatePresence>
+        {menuOpen && <Nav />}
+      </AnimatePresence>
       <div className={styles.bar}></div>
     </>
   );

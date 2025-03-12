@@ -1,40 +1,42 @@
 // src/App.jsx
-import { useEffect, useState } from 'react';
-import styles from './App.module.css';
-import Header from './components/Header/Header';
-import { AuthProvider } from './AuthContext.jsx';
-import Map from './components/Map/Map.jsx';
-import Card from './components/Card/Card.jsx';
+import { useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Account from './components/Account/Account.jsx';
-import SignupLogin from './components/Login/SignupLogin.jsx';
-
-
+import styles from './App.module.css';
+import { AuthProvider } from './AuthContext';
+import Map from './components/Map/Map';
+import Account from './components/Account/Account';
+import SignupLogin from './components/Login/SignupLogin';
+import About from './components/AboutPage/About';
+import Leaderboard from './components/Leaderboards/Leaderboard';
+import Tutorial from './components/Tutorial/Tutorial';
 
 function App() {
-
   useEffect(() => {
-    // Check for saved theme preference or system preference
+    // Theme preference logic
     const savedTheme = localStorage.getItem('theme');
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     
     if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
       document.documentElement.classList.add('dark');
     }
-    
   }, []);
 
   return (
     <AuthProvider>
-      <div className={styles.container}>
       <Router>
-        <Routes>
-          <Route path="/" element={<Map />} />
-          <Route path="/account" element={<Account />} />
-          <Route path="/login" element={<SignupLogin />} />
-        </Routes>
+        <div className={styles.container}>
+          <Routes>
+            <Route path="/" element={<Map />} />
+            <Route path="/account" element={<Account />} />
+            <Route path="/login" element={<SignupLogin />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/leaderboards" element={<Leaderboard />} />
+            <Route path="/tutorial" element={<Tutorial />} />
+
+
+          </Routes>
+        </div>
       </Router>
-      </div>
     </AuthProvider>
   );
 }

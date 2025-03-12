@@ -10,18 +10,18 @@ export default function LoginForm( { formik } ) {
 
       {/* Email Field */}
       <div className={styles.container}>
-        <label htmlFor="email" className={styles.label}>Email</label>
+        <label htmlFor="username" className={styles.label}>Email</label>
         <input
           className={styles.inputBox}
-          id="email"
-          name="email"
-          type="email"
+          id="username"
+          name="username"
+          type="text"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
-          value={formik.values.email}
+          value={formik.values.username}
         />
-        {formik.touched.email && formik.errors.email ? (
-          <div className={styles.errors}>{formik.errors.email}</div>
+        {formik.touched.username && formik.errors.username ? (
+          <div className={styles.errors}>{formik.errors.username}</div>
         ) : null}
       </div>
 

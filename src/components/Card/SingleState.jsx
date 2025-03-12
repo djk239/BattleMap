@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+// src/components/Card/SingleState.jsx
+import { useEffect, useState, useMemo } from 'react';
 import styles from './SingleState.module.css';
 
 const SingleState = ({ stateAbbreviation }) => {
@@ -6,26 +7,31 @@ const SingleState = ({ stateAbbreviation }) => {
   const [viewBox, setViewBox] = useState("0 0 959 593");
 
   useEffect(() => {
-    const fullMap = document.querySelector('#mapcontainer');
-    if (fullMap) {
+    const findStatePath = () => {
+      const fullMap = document.querySelector('#mapcontainer');
+      if (!fullMap) return null;
+
       const pathElement = fullMap.querySelector(`path[data-name="${stateAbbreviation}"]`);
-      if (pathElement) {
-        // Clone the path element
-        const clonedPath = pathElement.cloneNode(true);
-        
-        // Get the bounding box
-        const bbox = pathElement.getBBox();
-        
-        // Set the viewBox
-        setViewBox(`${bbox.x} ${bbox.y} ${bbox.width} ${bbox.height}`);
+      return pathElement;
+    };
 
-        // Remove the transform attribute
-        clonedPath.removeAttribute('transform');
-
-        setStatePath(clonedPath);
-      }
+    const pathElement = findStatePath();
+    
+    if (pathElement) {
+      const clonedPath = pathElement.cloneNode(true);
+      const bbox = pathElement.getBBox();
+      
+      setViewBox(`${bbox.x} ${bbox.y} ${bbox.width} ${bbox.height}`);
+      clonedPath.removeAttribute('transform');
+      setStatePath(clonedPath);
     }
   }, [stateAbbreviation]);
+
+  const svgContent = useMemo(() => {
+    return statePath 
+      ? { __html: statePath.outerHTML } 
+      : null;
+  }, [statePath]);
 
   if (!statePath) {
     return <p>Loading state...</p>;
@@ -40,7 +46,7 @@ const SingleState = ({ stateAbbreviation }) => {
       height="200"
       preserveAspectRatio="xMidYMid meet"
     >
-      <g dangerouslySetInnerHTML={{ __html: statePath.outerHTML }} />
+      {svgContent && <g dangerouslySetInnerHTML={svgContent} />}
     </svg>
   );
 };

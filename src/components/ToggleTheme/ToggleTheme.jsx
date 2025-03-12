@@ -1,28 +1,43 @@
-import React, { useEffect } from 'react';
+// src/components/ToggleTheme/ToggleTheme.jsx
+import { useEffect, useCallback, useState } from 'react';
 import styles from './ToggleTheme.module.css';
 
-function ToggleTheme() {
-  // Load theme from localStorage on mount
+// Custom hook for theme management
+const useTheme = () => {
+  const [theme, setTheme] = useState(() => {
+    // Initialize theme from localStorage or system preference
+    return localStorage.getItem('theme') || 
+           (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  });
+
   useEffect(() => {
-    const savedTheme = localStorage.getItem('theme') || 'light';
-    document.documentElement.setAttribute('data-theme', savedTheme);
+    // Apply theme to document
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+  }, [theme]);
+
+  const toggleTheme = useCallback(() => {
+    setTheme(prevTheme => prevTheme === 'dark' ? 'light' : 'dark');
   }, []);
 
-  // Toggle theme function
-  const toggleTheme = () => {
-    const currentTheme = document.documentElement.getAttribute('data-theme');
-    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+  return { theme, toggleTheme };
+};
 
-    // Set the new theme
-    document.documentElement.setAttribute('data-theme', newTheme);
-    localStorage.setItem('theme', newTheme);
-  };
+// Theme toggle component
+const ToggleTheme = () => {
+  const { theme, toggleTheme } = useTheme();
 
   return (
-    <button className={styles.toggleButton} onClick={toggleTheme}>
-      Toggle Theme 🌙
-    </button>
+    <div className={styles.themeToggleContainer}>
+      <button 
+        className={styles.toggleButton} 
+        onClick={toggleTheme}
+        aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+      >
+        {theme === 'dark' ? '☀️' : '🌙'}
+      </button>
+    </div>
   );
-}
+};
 
 export default ToggleTheme;

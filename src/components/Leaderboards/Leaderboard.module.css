@@ -1,0 +1,104 @@
+/* Leaderboard.module.css */
+.leaderboardContainer {
+    display: flex;
+    flex-direction: column;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: var(--spacing-lg);
+  }
+  
+  .title {
+    font-size: var(--font-size-xl);
+    color: var(--text-800);
+    margin-bottom: var(--spacing-lg);
+    text-align: center;
+  }
+  
+  .leaderboardList {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+  }
+  
+  .leaderboardItem {
+    display: flex;
+    align-items: center;
+    background-color: var(--background-700);
+    border-radius: var(--border-radius-md);
+    padding: var(--spacing-md);
+    transition: background-color 0.3s ease;
+  }
+  
+  .leaderboardItem:hover {
+    background-color: var(--background-500);
+  }
+  
+  .rank {
+    font-size: var(--font-size-lg);
+    font-weight: bold;
+    color: var(--text-600);
+    margin-right: var(--spacing-md);
+    min-width: 30px;
+  }
+  
+  .userInfo {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .username {
+    font-size: var(--font-size-lg);
+    color: var(--text-400);
+    font-weight: 600;
+    text-shadow: 2px 2px 4px var(--background-500);
+  }
+  
+  .level {
+    font-size: var(--font-size-sm);
+    color: var(--text-100);
+    font-weight: 500;
+  }
+  
+  /* Special styling for top 3 ranks */
+  .rank1 {
+    background-color: var(--accent-400);
+  }
+  
+  .rank2 {
+    background-color: var(--accent-500);
+  }
+  
+  .rank3 {
+    background-color: var(--accent-500);
+  }
+  
+  .loading,
+  .error,
+  .empty {
+    text-align: center;
+    color: var(--text-600);
+    padding: var(--spacing-lg);
+    font-size: var(--font-size-md);
+  }
+  
+  .error {
+    color: var(--accent-600);
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 600px) {
+    .leaderboardContainer {
+      padding: var(--spacing-md);
+    }
+  
+    .leaderboardItem {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .rank {
+      margin-bottom: var(--spacing-sm);
+    }
+  }

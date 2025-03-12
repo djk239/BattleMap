@@ -1,65 +1,82 @@
-import React, { useState } from 'react';
-import styles from './Nav.module.css';
-import { motion, AnimatePresence } from "framer-motion";
+// src/components/Nav/Nav.jsx
+import { motion } from "framer-motion";
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../AuthContext';
+import styles from './Nav.module.css';
 import ToggleTheme from '../ToggleTheme/ToggleTheme';
 
-function Nav({close}) {
-  // State to toggle login/signup popup form. FALSE by default
-  const [popupOpen, setPopupOpen] = useState(false);  
+const navVariants = {
+  initial: { x: '-100%' },
+  animate: { x: 0 },
+  exit: { x: '-100%' }
+};
 
-  // Authentication hook for getting login state and login and logout functions
-  const { isLoggedIn, handleLog, handleLogout } = useAuth();
+const linkMotion = {
+  whileTap: { scale: 0.8 },
+  whileHover: { scale: 1.2 }
+};
 
-  // Function to toggle login/signup popup
-  const popup = () => {
-    setPopupOpen(!popupOpen);
-  };
+function Nav() {
+  const { isLoggedIn } = useAuth();
+
+  const NavLinks = [
+    { 
+      condition: !isLoggedIn, 
+      to: "/login", 
+      label: "SignUp / Login" 
+    },
+    { 
+      to: "/", 
+      label: "War Map" 
+    },
+    { 
+      to: "/leaderboards", 
+      label: "Leaderboards" 
+    },
+    { 
+      condition: isLoggedIn, 
+      to: "/account", 
+      label: "Account" 
+    },
+    { 
+      to: "/tutorial", 
+      label: "Tutorial" 
+    },
+    { 
+      to: "/about", 
+      label: "About" 
+    }
+  ];
 
   return (
     <motion.div
-      initial={{ x: '-100%' }}
-      animate={{ x: 0 }}
-      exit={{ x: '-100%' }}
-      transition={{ type: 'tween', duration: .5 }}
+      variants={navVariants}
+      initial="initial"
+      animate="animate"
+      exit="exit"
+      transition={{ type: 'tween', duration: 0.5 }}
       className={styles.container}
     >
       <div className={styles.linkcontainer}>
-
-        {!isLoggedIn && 
-            <motion.div whileTap={{scale: 0.8}} whileHover={{scale: 1.2}}>
-                <Link className={styles.links} to="/login">SignUp / Login</Link>
+        {NavLinks.map((link, index) => (
+          (link.condition === undefined || link.condition) && (
+            <motion.div key={index} {...linkMotion}>
+              <Link 
+                className={styles.links} 
+                to={link.to}
+              >
+                {link.label}
+              </Link>
             </motion.div>
-        }
-            <motion.div whileTap={{scale: 0.8}} whileHover={{scale: 1.2}}>
-                <Link className={styles.links} to="/">War Map</Link>
-            </motion.div>
-            <motion.div whileTap={{scale: 0.8}} whileHover={{scale: 1.2}}>
-                <div className={styles.links} to="/">Leaderboards</div>
-            </motion.div>
-        {isLoggedIn && 
-            <motion.div whileTap={{scale: 0.8}} whileHover={{scale: 1.2}}>
-                <div className={styles.links} to="/">Account</div>
-            </motion.div>
-        }
-            <motion.div whileTap={{scale: 0.8}} whileHover={{scale: 1.2}}>
-                <div className={styles.links} to="/">Contact</div>
-            </motion.div>
-            <motion.div whileTap={{scale: 0.8}} whileHover={{scale: 1.2}}>
-                <div className={styles.links} to="/">Tutorial</div>
-            </motion.div>
-
-
-
+          )
+        ))}
       </div>
       <ToggleTheme />
       <div className={styles.termscontainer}>
-        <div className={styles.terms} to="/terms">Terms and Conditions</div>
+        <div className={styles.terms}>Terms and Conditions</div>
         <p className={styles.terms}>|</p>
-        <div className={styles.terms} to="/privacy">Privacy Policy</div>
+        <div className={styles.terms}>Privacy Policy</div>
       </div>
-      {popupOpen && <PopupMenu close={close}/>}
     </motion.div>
   );
 }
